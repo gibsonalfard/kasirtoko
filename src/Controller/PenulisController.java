@@ -27,7 +27,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Gibran
  */
-public class PenulisController extends Controller implements iDataAccess{
+public class PenulisController extends Controller{
     List<Penulis> list = new ArrayList<>();
 
     public PenulisController() {
@@ -39,7 +39,7 @@ public class PenulisController extends Controller implements iDataAccess{
         try {
             FileInputStream excelFile = new FileInputStream(new File(FILE_NAME));
             Workbook workbook = new XSSFWorkbook(excelFile);
-            Sheet sheet = workbook.getSheetAt(3);
+            Sheet sheet = workbook.getSheetAt(1);
             Iterator<Row> iterator = sheet.iterator();
             iterator.next();
             
@@ -94,9 +94,8 @@ public class PenulisController extends Controller implements iDataAccess{
         while(i<list.size() && !ketemu){
             String ID = list.get(i).getIdPenulis();
 
-            writer = list.get(i);
-
             if(ID.equals(id)){
+                writer = list.get(i);
                 ketemu = true;
             }
 

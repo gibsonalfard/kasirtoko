@@ -26,7 +26,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Gibran
  */
-public class KategoriController extends Controller implements iDataAccess {
+public class KategoriController extends Controller{
 
     List<Kategori> list = new ArrayList<>();
 

@@ -5,7 +5,9 @@
  */
 package kasirtoko;
 
-import Controller.KategoriController;
+import Controller.Controller;
+import Controller.PenerbitController;
+import Controller.PenulisController;
 
 /**
  *
@@ -17,7 +19,8 @@ public class KasirToko {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        KategoriController kc = new KategoriController();
+        Controller kc = new PenerbitController();
+        
         kc.getAllData();
         kc.printList();
     }

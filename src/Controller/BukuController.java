@@ -27,7 +27,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Gibran
  */
-public class BukuController extends Controller implements iDataAccess {
+public class BukuController extends Controller{
     List<Buku> list = new ArrayList<>();
 
     public BukuController() {
@@ -39,7 +39,7 @@ public class BukuController extends Controller implements iDataAccess {
         try {
             FileInputStream excelFile = new FileInputStream(new File(FILE_NAME));
             Workbook workbook = new XSSFWorkbook(excelFile);
-            Sheet sheet = workbook.getSheetAt(3);
+            Sheet sheet = workbook.getSheetAt(0);
             Iterator<Row> iterator = sheet.iterator();
             iterator.next();
             
@@ -90,7 +90,7 @@ public class BukuController extends Controller implements iDataAccess {
     }
 
     @Override
-    void init() {
+    final void init() {
         getAllData();
     }
 }

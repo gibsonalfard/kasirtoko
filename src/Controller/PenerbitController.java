@@ -27,7 +27,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Gibran
  */
-public class PenerbitController extends Controller implements iDataAccess {
+public class PenerbitController extends Controller{
 
     List<Penerbit> list = new ArrayList<>();
 
@@ -40,7 +40,7 @@ public class PenerbitController extends Controller implements iDataAccess {
         try {
             FileInputStream excelFile = new FileInputStream(new File(FILE_NAME));
             Workbook workbook = new XSSFWorkbook(excelFile);
-            Sheet sheet = workbook.getSheetAt(3);
+            Sheet sheet = workbook.getSheetAt(2);
             Iterator<Row> iterator = sheet.iterator();
             iterator.next();
             
@@ -94,9 +94,8 @@ public class PenerbitController extends Controller implements iDataAccess {
         while(i<list.size() && !ketemu){
             String ID = list.get(i).getIdPenerbit();
 
-            pub = list.get(i);
-
             if(ID.equals(id)){
+                pub = list.get(i);
                 ketemu = true;
             }
 

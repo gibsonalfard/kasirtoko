@@ -5,10 +5,12 @@
  */
 package Controller;
 
+import Interface.iDataAccess;
+
 /**
  *
  * @author Gibran
  */
-public abstract class Controller {
+public abstract class Controller implements iDataAccess {
     abstract void init();
 }
