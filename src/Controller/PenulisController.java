@@ -27,8 +27,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Gibran
  */
-public class PenulisController extends Penulis implements iDataAccess{
+public class PenulisController extends Controller implements iDataAccess{
     List<Penulis> list = new ArrayList<>();
+
+    public PenulisController() {
+        this.init();
+    }
     
     @Override
     public void getAllData(){
@@ -101,5 +105,10 @@ public class PenulisController extends Penulis implements iDataAccess{
         }
         
         return writer;
+    }
+
+    @Override
+    final void init() {
+        getAllData();
     }
 }

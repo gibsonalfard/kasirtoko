@@ -27,10 +27,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Gibran
  */
-public class PenerbitController extends Penerbit implements iDataAccess {
+public class PenerbitController extends Controller implements iDataAccess {
 
     List<Penerbit> list = new ArrayList<>();
 
+    public PenerbitController() {
+        this.init();
+    }
+    
     @Override
     public void getAllData() {
         try {
@@ -101,6 +105,11 @@ public class PenerbitController extends Penerbit implements iDataAccess {
         }
         
         return pub;
+    }
+
+    @Override
+    final void init() {
+        getAllData();
     }
 
 }

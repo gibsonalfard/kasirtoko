@@ -26,9 +26,13 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Gibran
  */
-public class KategoriController extends Kategori implements iDataAccess {
+public class KategoriController extends Controller implements iDataAccess {
 
     List<Kategori> list = new ArrayList<>();
+
+    public KategoriController() {
+        this.init();
+    }
     
     @Override
     public void getAllData(){
@@ -78,4 +82,8 @@ public class KategoriController extends Kategori implements iDataAccess {
         
     }
 
+    @Override
+    final void init() {
+        getAllData();
+    }
 }

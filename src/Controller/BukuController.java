@@ -8,7 +8,7 @@ package Controller;
 import Interface.iDataAccess;
 import static Interface.iDataAccess.FILE_NAME;
 import Model.Buku;
-import Model.Penulis;
+import Model.SubKategori;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -27,9 +27,13 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Gibran
  */
-public class BukuController extends Buku implements iDataAccess {
+public class BukuController extends Controller implements iDataAccess {
     List<Buku> list = new ArrayList<>();
 
+    public BukuController() {
+        this.init();
+    }
+    
     @Override
     public void getAllData() {
         try {
@@ -55,8 +59,8 @@ public class BukuController extends Buku implements iDataAccess {
                 book.setIdBuku(idBuku.getStringCellValue());
                 book.setJudulBuku(judul.getStringCellValue());
                 
-                
-                book.setSubKategori(super.getSubKategori());
+                SubKategori sub = new SubKategori();
+                book.setSubKategori(sub);
                 
                 PenulisController wri = new PenulisController();
                 book.setPenulis(wri.getElement(write.getStringCellValue()));
@@ -83,5 +87,10 @@ public class BukuController extends Buku implements iDataAccess {
     @Override
     public void filterList(int filter, String nilai) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    void init() {
+        getAllData();
     }
 }
