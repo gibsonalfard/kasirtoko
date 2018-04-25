@@ -10,7 +10,7 @@ package Interface;
  * @author Gibran
  */
 public interface iDataAccess {
-    String FILE_NAME = "*/../src/Excel/data.xls";
+    String FILE_NAME = "*/../src/Excel/dataProject.xlsx";
     
     void getAllData();
     void printList();

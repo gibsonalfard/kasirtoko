@@ -18,6 +18,7 @@ public class KasirToko {
      */
     public static void main(String[] args) {
         KategoriController kc = new KategoriController();
+        kc.getAllData();
         kc.printList();
     }
     

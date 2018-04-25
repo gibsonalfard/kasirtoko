@@ -34,6 +34,7 @@ public class KategoriController extends Kategori implements iDataAccess {
     public void getAllData(){
         try {
             FileInputStream excelFile = new FileInputStream(new File(FILE_NAME));
+            System.out.println(FILE_NAME);
             Workbook workbook = new XSSFWorkbook(excelFile);
             Sheet sheet = workbook.getSheetAt(3);
             Iterator<Row> iterator = sheet.iterator();
@@ -61,7 +62,7 @@ public class KategoriController extends Kategori implements iDataAccess {
 
     @Override
     public void printList() {
-        if(this.list.size() == 0){
+        if(this.list.isEmpty()){
             this.getAllData();
         }
         int size = this.list.size();
