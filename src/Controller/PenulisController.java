@@ -6,7 +6,8 @@
 package Controller;
 
 import Interface.iDataAccess;
-import Model.Kategori;
+import static Interface.iDataAccess.FILE_NAME;
+import Model.Penulis;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -26,9 +27,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Gibran
  */
-public class KategoriController extends Kategori implements iDataAccess {
-
-    List<Kategori> list = new ArrayList<>();
+public class PenulisController extends Penulis implements iDataAccess{
+    List<Penulis> list = new ArrayList<>();
     
     @Override
     public void getAllData(){
@@ -42,14 +42,14 @@ public class KategoriController extends Kategori implements iDataAccess {
             while(iterator.hasNext()){
                 Row currentRow = iterator.next();
                 
-                Cell idKategori = currentRow.getCell(0);
-                Cell kat = currentRow.getCell(1);
+                Cell idPenulis = currentRow.getCell(0);
+                Cell nama = currentRow.getCell(1);
                 
-                Kategori kategori = new Kategori();
-                kategori.setIdKategori(idKategori.getStringCellValue());
-                kategori.setKategori(kat.getStringCellValue());
+                Penulis writer = new Penulis();
+                writer.setIdPenulis(idPenulis.getStringCellValue());
+                writer.setNamaPenulis(nama.getStringCellValue());
                 
-                this.list.add(kategori);
+                this.list.add(writer);
             }
             
         } catch (FileNotFoundException ex) {
@@ -66,10 +66,10 @@ public class KategoriController extends Kategori implements iDataAccess {
         }
         int size = this.list.size();
         
-        System.out.println("ID Kategori\tKategori");
+        System.out.println("ID Penulis\tNama Penulis");
         for(int i = 0; i < size; i++){
-            System.out.print(this.list.get(i).getIdKategori() + "\t");
-            System.out.print(this.list.get(i).getKategori()+ "\n");
+            System.out.print(this.list.get(i).getIdPenulis()+ "\t");
+            System.out.print(this.list.get(i).getNamaPenulis()+ "\n");
         }
     }
 
@@ -77,5 +77,29 @@ public class KategoriController extends Kategori implements iDataAccess {
     public void filterList(int filter, String nilai) {
         
     }
+    
+    public Penulis getElement(String id){
+        Penulis writer = new Penulis();
+        
+        if(this.list.isEmpty()){
+            getAllData();
+        }
+        
+        int i = 0;
+        boolean ketemu = false;
+        while(i<list.size() && !ketemu){
+            String ID = list.get(i).getIdPenulis();
 
+            writer = list.get(i);
+
+            if(ID.equals(id)){
+                ketemu = true;
+            }
+
+            i += 1;
+        
+        }
+        
+        return writer;
+    }
 }

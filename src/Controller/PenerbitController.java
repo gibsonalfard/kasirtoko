@@ -6,7 +6,8 @@
 package Controller;
 
 import Interface.iDataAccess;
-import Model.Kategori;
+import static Interface.iDataAccess.FILE_NAME;
+import Model.Penerbit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -26,12 +27,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Gibran
  */
-public class KategoriController extends Kategori implements iDataAccess {
+public class PenerbitController extends Penerbit implements iDataAccess {
 
-    List<Kategori> list = new ArrayList<>();
-    
+    List<Penerbit> list = new ArrayList<>();
+
     @Override
-    public void getAllData(){
+    public void getAllData() {
         try {
             FileInputStream excelFile = new FileInputStream(new File(FILE_NAME));
             Workbook workbook = new XSSFWorkbook(excelFile);
@@ -42,20 +43,19 @@ public class KategoriController extends Kategori implements iDataAccess {
             while(iterator.hasNext()){
                 Row currentRow = iterator.next();
                 
-                Cell idKategori = currentRow.getCell(0);
-                Cell kat = currentRow.getCell(1);
+                Cell idPenerbit = currentRow.getCell(0);
+                Cell nama = currentRow.getCell(1);
                 
-                Kategori kategori = new Kategori();
-                kategori.setIdKategori(idKategori.getStringCellValue());
-                kategori.setKategori(kat.getStringCellValue());
+                Penerbit publish = new Penerbit();
+                publish.setIdPenerbit(idPenerbit.getStringCellValue());
+                publish.setNamaPenerbit(nama.getStringCellValue());
                 
-                this.list.add(kategori);
+                this.list.add(publish);
             }
-            
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(KategoriController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PenerbitController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(KategoriController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PenerbitController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -66,16 +66,41 @@ public class KategoriController extends Kategori implements iDataAccess {
         }
         int size = this.list.size();
         
-        System.out.println("ID Kategori\tKategori");
+        System.out.println("ID Penerbit\tNama Penerbit");
         for(int i = 0; i < size; i++){
-            System.out.print(this.list.get(i).getIdKategori() + "\t");
-            System.out.print(this.list.get(i).getKategori()+ "\n");
+            System.out.print(this.list.get(i).getIdPenerbit()+ "\t");
+            System.out.print(this.list.get(i).getNamaPenerbit()+ "\n");
         }
     }
 
     @Override
     public void filterList(int filter, String nilai) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public Penerbit getElement(String id){
+        Penerbit pub = new Penerbit();
         
+        if(this.list.isEmpty()){
+            getAllData();
+        }
+        
+        int i = 0;
+        boolean ketemu = false;
+        while(i<list.size() && !ketemu){
+            String ID = list.get(i).getIdPenerbit();
+
+            pub = list.get(i);
+
+            if(ID.equals(id)){
+                ketemu = true;
+            }
+
+            i += 1;
+        
+        }
+        
+        return pub;
     }
 
 }
