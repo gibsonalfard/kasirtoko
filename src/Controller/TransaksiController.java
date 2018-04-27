@@ -6,7 +6,8 @@
 package Controller;
 
 import Interface.iDataAccess;
-import Model.Kategori;
+import static Interface.iDataAccess.FILE_NAME;
+import Model.Transaksi;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -24,56 +25,55 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
- * @author Gibran
+ * @author ACER Z3-451
  */
-public class KategoriController extends Controller{
-
-    List<Kategori> list = new ArrayList<>();
-
-    public KategoriController() {
-        this.init();
-    }
+public class TransaksiController extends Transaksi implements iDataAccess {
+    List<Transaksi> list = new ArrayList<>();
     
     @Override
-    public void getAllData(){
+    public void getAllData() {
+        
         try {
             FileInputStream excelFile = new FileInputStream(new File(FILE_NAME));
             Workbook workbook = new XSSFWorkbook(excelFile);
-            Sheet sheet = workbook.getSheetAt(3);
+            Sheet sheet = workbook.getSheetAt(5);
             Iterator<Row> iterator = sheet.iterator();
             iterator.next();
             
-            while(iterator.hasNext()){
+            while (iterator.hasNext()) {
                 Row currentRow = iterator.next();
                 
-                Cell idKategori = currentRow.getCell(0);
-                Cell kat = currentRow.getCell(1);
+                Cell idTransaksi = currentRow.getCell(0);
+                Cell tglTransaksi = currentRow.getCell(1);
+                Cell total = currentRow.getCell(2);
                 
-                Kategori kategori = new Kategori();
-                kategori.setIdKategori(idKategori.getStringCellValue());
-                kategori.setKategori(kat.getStringCellValue());
+                Transaksi transaksi = new Transaksi();
+                transaksi.setIdTransaksi(idTransaksi.getStringCellValue());
+                transaksi.setTglTransaksi(tglTransaksi.getDateCellValue());
+                transaksi.setTotal(total.getNumericCellValue());
                 
-                this.list.add(kategori);
+                this.list.add(transaksi);
             }
             
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(KategoriController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TransaksiController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(KategoriController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TransaksiController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
     public void printList() {
-        if(this.list.isEmpty()){
+        if(this.list.size() == 0){
             this.getAllData();
         }
         int size = this.list.size();
         
-        System.out.println("ID Kategori\tKategori");
+        System.out.println("ID Transaksi\t\tTgl Transaksi\t\t\tTotal\n");
         for(int i = 0; i < size; i++){
-            System.out.print(this.list.get(i).getIdKategori() + "\t");
-            System.out.print(this.list.get(i).getKategori()+ "\n");
+            System.out.print(this.list.get(i).getIdTransaksi()+ "\t\t\t");
+            System.out.print(this.list.get(i).getTglTransaksi()+ "\t");
+            System.out.print(this.list.get(i).getTotal()+ "\n");
         }
     }
 
@@ -81,14 +81,9 @@ public class KategoriController extends Controller{
     public void filterList(int filter, String nilai) {
         
     }
-
-    @Override
-    final void init() {
-        getAllData();
-    }
     
-    public Kategori getElement (String id) {
-        Kategori kat = new Kategori();
+    public Transaksi getElement (String id) {
+        Transaksi tr = new Transaksi();
         
         if (this.list.isEmpty()) {
             getAllData();
@@ -97,14 +92,14 @@ public class KategoriController extends Controller{
         int i = 0;
         boolean ketemu = false;
         while (i < list.size() && !ketemu) {
-            String ID = list.get(i).getIdKategori();
+            String ID = list.get(i).getIdTransaksi();
             
             if (ID.equals(id)) {
                 ketemu = true;
-                kat = list.get(i);
+                tr = list.get(i);
             }
             i += 1;        
         }
-        return kat;
-    }
+        return tr;
+    }    
 }

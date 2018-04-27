@@ -93,4 +93,25 @@ public class BukuController extends Controller{
     final void init() {
         getAllData();
     }
+    
+    public Buku getElements (String id) {
+        Buku buku = new Buku();
+        
+        if (this.list.isEmpty()) {
+            getAllData();
+        }
+        
+        int i = 0;
+        boolean ketemu = false;
+        while (i < list.size() && !ketemu) {
+            String ID = list.get(i).getIdBuku();
+            
+            if (ID.equals(id)) {
+                ketemu = true;
+                buku = list.get(i);
+            }
+            i += 1;        
+        }
+        return buku;
+    }
 }
