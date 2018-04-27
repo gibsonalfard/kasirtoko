@@ -78,7 +78,7 @@ public class SubKategoriController extends SubKategori implements iDataAccess {
         System.out.println("ID SubKategor\t Kategori\t SubKategori\n");
         for (int i = 0; i < size; i++) {
             System.out.print(this.list.get(i).getIdSubkategori()+ "\t");
-            System.out.print(this.list.get(i).getKategori()+ "\t");
+            System.out.print(this.list.get(i).getKategori().getKategori()+ "\t");
             System.out.print(this.list.get(i).getSubKategori()+ "\n");
         }
     }

@@ -27,7 +27,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Gibran
  */
-public class BukuController extends Controller{
+public class BukuController extends Controller {
     List<Buku> list = new ArrayList<>();
 
     public BukuController() {
@@ -81,17 +81,27 @@ public class BukuController extends Controller{
 
     @Override
     public void printList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(this.list.size() == 0){
+            this.getAllData();
+        }
+        int size = this.list.size();
+        
+        System.out.println("ID Buku\tJudul Buku\t\t\tSub Kategori\tPenulis\t\tPenerbit\tTahun Terbit\tSinopsis\tHarga\n");
+        for(int i = 0; i < size; i++){
+            System.out.print(this.list.get(i).getIdBuku()+ "\t");
+            System.out.print(this.list.get(i).getJudulBuku()+ "\t\t");
+            System.out.print(this.list.get(i).getSubKategori().getSubKategori()+ "\t");
+            System.out.print(this.list.get(i).getPenulis().getNamaPenulis()+ "\t");
+            System.out.print(this.list.get(i).getPenerbit().getNamaPenerbit()+ "\t");
+            System.out.print(this.list.get(i).getTahunTerbit()+ "\t");
+            System.out.print(this.list.get(i).getSinopsis()+ "\t");
+            System.out.print(this.list.get(i).getHarga()+ "\n");
+        }
     }
 
     @Override
     public void filterList(int filter, String nilai) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    final void init() {
-        getAllData();
+        
     }
     
     public Buku getElements (String id) {
@@ -113,5 +123,10 @@ public class BukuController extends Controller{
             i += 1;        
         }
         return buku;
+    }
+
+    @Override
+    final void init() {
+        getAllData();
     }
 }

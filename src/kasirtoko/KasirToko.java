@@ -5,9 +5,14 @@
  */
 package kasirtoko;
 
+import Controller.BukuController;
 import Controller.Controller;
+import Controller.DetailTransaksiController;
+import Controller.KategoriController;
 import Controller.PenerbitController;
 import Controller.PenulisController;
+import Controller.SubKategoriController;
+import Controller.TransaksiController;
 
 /**
  *
@@ -23,6 +28,35 @@ public class KasirToko {
         
         kc.getAllData();
         kc.printList();
+        System.out.println("\n");
+        
+        BukuController buku = new BukuController();
+        buku.printList();
+        System.out.println("\n");
+        
+        PenulisController penulis = new PenulisController();
+        penulis.printList();
+        System.out.println("\n");
+        
+        PenerbitController penerbit = new PenerbitController();
+        penerbit.printList();
+        System.out.println("\n");
+        
+        KategoriController kategori = new KategoriController();
+        kategori.printList();
+        System.out.println("\n");
+         
+        SubKategoriController subKat = new SubKategoriController();
+        subKat.printList();
+        System.out.println("\n");
+          
+        TransaksiController trk = new TransaksiController();
+        trk.printList();
+        System.out.println("\n");
+        
+        DetailTransaksiController detailTransaksi = new DetailTransaksiController();
+        detailTransaksi.printList();
+        System.out.println("\n");
     }
     
 }

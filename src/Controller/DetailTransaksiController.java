@@ -57,8 +57,10 @@ public class DetailTransaksiController extends DetailTransaksi implements iDataA
                 BukuController buku1 = new BukuController();
                 dtlTransaksi.setBarang(buku1.getElements(buku.getStringCellValue()));
                 
-                dtlTransaksi.setQty((int)qty.getNumericCellValue());
+                dtlTransaksi.setQty((int) qty.getNumericCellValue());
                 dtlTransaksi.setTotal(total.getNumericCellValue());
+                
+                this.list.add(dtlTransaksi);
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DetailTransaksiController.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,12 +76,12 @@ public class DetailTransaksiController extends DetailTransaksi implements iDataA
         }
         int size = this.list.size();
         
-        System.out.println("ID Detail\t Transaksi\t\tJudul Buku\t\t Quantity\t\t Total\n");
+        System.out.println("ID Detail\t Transaksi\t\tJudul Buku\t\t\tQuantity\t\t Total\n");
         for(int i = 0; i < size; i++){
-            System.out.print(this.list.get(i).getIdDetail()+ "\t\t\t");
-            System.out.print(this.list.get(i).getTransaksi().getIdTransaksi()+ "\t");
-            System.out.println (this.list.get(i).getBarang().getJudulBuku()+ "\t");
-            System.out.println (this.list.get(i).getQty());
+            System.out.print(this.list.get(i).getIdDetail()+ "\t\t");
+            System.out.print(this.list.get(i).getTransaksi().getIdTransaksi()+ "\t\t\t");
+            System.out.print (this.list.get(i).getBarang().getJudulBuku()+ "\t");
+            System.out.print (this.list.get(i).getQty()+"\t\t");
             System.out.print(this.list.get(i).getTotal()+ "\n");
         }
     }
