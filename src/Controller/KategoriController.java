@@ -76,6 +76,32 @@ public class KategoriController extends Controller{
             System.out.print(this.list.get(i).getKategori()+ "\n");
         }
     }
+    
+    @Override
+    public void printList(int start, int end) {
+        if(this.list.isEmpty()){
+            this.getAllData();
+        }
+        
+        System.out.println("ID Kategori\tKategori");
+        for(int i = start-1; i < end; i++){
+            System.out.print(this.list.get(i).getIdKategori() + "\t");
+            System.out.print(this.list.get(i).getKategori()+ "\n");
+        }
+    }
+    
+    @Override
+    public void printList(int limit) {
+        if(this.list.isEmpty()){
+            this.getAllData();
+        }
+        
+        System.out.println("ID Kategori\tKategori");
+        for(int i = 0; i < limit; i++){
+            System.out.print(this.list.get(i).getIdKategori() + "\t");
+            System.out.print(this.list.get(i).getKategori()+ "\n");
+        }
+    }
 
     @Override
     public void filterList(int filter, String nilai) {

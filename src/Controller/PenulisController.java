@@ -76,6 +76,34 @@ public class PenulisController extends Controller{
             System.out.print(this.list.get(i).getNamaPenulis()+ "\n");
         }
     }
+    
+    @Override
+    public void printList(int start, int end) {
+        if(this.list.isEmpty()){
+            this.getAllData();
+        }
+        int size = this.list.size();
+        
+        System.out.println("ID Penulis\tNama Penulis");
+        for(int i = start-1; i < end; i++){
+            System.out.print(this.list.get(i).getIdPenulis()+ "\t");
+            System.out.print(this.list.get(i).getNamaPenulis()+ "\n");
+        }
+    }
+    
+    @Override
+    public void printList(int limit) {
+        if(this.list.isEmpty()){
+            this.getAllData();
+        }
+        int size = this.list.size();
+        
+        System.out.println("ID Penulis\tNama Penulis");
+        for(int i = 0; i < limit; i++){
+            System.out.print(this.list.get(i).getIdPenulis()+ "\t");
+            System.out.print(this.list.get(i).getNamaPenulis()+ "\n");
+        }
+    }
 
     @Override
     public void filterList(int filter, String nilai) {

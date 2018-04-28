@@ -27,8 +27,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author ACER Z3-451
  */
-public class DetailTransaksiController extends DetailTransaksi implements iDataAccess {
+public class DetailTransaksiController extends Controller{
     List<DetailTransaksi> list = new ArrayList<>();
+
+    public DetailTransaksiController() {
+        init();
+    }
     
     @Override
     public void getAllData() {
@@ -70,6 +74,40 @@ public class DetailTransaksiController extends DetailTransaksi implements iDataA
     }
 
     @Override
+    public void printList(int start, int end) {
+        if(this.list.isEmpty()){
+            this.getAllData();
+        }
+        int size = this.list.size();
+        
+        System.out.println("ID Detail\t Transaksi\t\tJudul Buku\t\t\tQuantity\t\t Total\n");
+        for(int i = start-1; i < end; i++){
+            System.out.print(this.list.get(i).getIdDetail()+ "\t\t");
+            System.out.print(this.list.get(i).getTransaksi().getIdTransaksi()+ "\t\t\t");
+            System.out.print (this.list.get(i).getBarang().getJudulBuku()+ "\t");
+            System.out.print (this.list.get(i).getQty()+"\t\t");
+            System.out.print(this.list.get(i).getTotal()+ "\n");
+        }
+    }
+    
+    @Override
+    public void printList(int limit) {
+        if(this.list.isEmpty()){
+            this.getAllData();
+        }
+        int size = this.list.size();
+        
+        System.out.println("ID Detail\t Transaksi\t\tJudul Buku\t\t\tQuantity\t\t Total\n");
+        for(int i = 0; i < limit; i++){
+            System.out.print(this.list.get(i).getIdDetail()+ "\t\t");
+            System.out.print(this.list.get(i).getTransaksi().getIdTransaksi()+ "\t\t\t");
+            System.out.print (this.list.get(i).getBarang().getJudulBuku()+ "\t");
+            System.out.print (this.list.get(i).getQty()+"\t\t");
+            System.out.print(this.list.get(i).getTotal()+ "\n");
+        }
+    }
+    
+    @Override
     public void printList() {
         if(this.list.isEmpty()){
             this.getAllData();
@@ -89,6 +127,11 @@ public class DetailTransaksiController extends DetailTransaksi implements iDataA
     @Override
     public void filterList(int filter, String nilai) {
         
+    }
+
+    @Override
+    final void init() {
+        getAllData();
     }
     
 }

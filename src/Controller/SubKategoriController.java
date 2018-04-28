@@ -28,9 +28,13 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author ACER Z3-451
  */
-public class SubKategoriController extends SubKategori implements iDataAccess {
+public class SubKategoriController extends Controller{
     
     List<SubKategori> list = new ArrayList<>();
+
+    public SubKategoriController() {
+        init();
+    }
     
     @Override
     public void getAllData() {
@@ -69,7 +73,7 @@ public class SubKategoriController extends SubKategori implements iDataAccess {
 
     @Override
     public void printList() {
-        if (this.list.size() == 0) {
+        if (this.list.isEmpty()) {
             this.getAllData();
         }
         
@@ -82,9 +86,70 @@ public class SubKategoriController extends SubKategori implements iDataAccess {
             System.out.print(this.list.get(i).getSubKategori()+ "\n");
         }
     }
+    
+    @Override
+    public void printList(int start, int end) {
+        if (this.list.isEmpty()) {
+            this.getAllData();
+        }
+        
+        int size = this.list.size();
+        
+        System.out.println("ID SubKategor\t Kategori\t SubKategori\n");
+        for (int i = start-1; i < end; i++) {
+            System.out.print(this.list.get(i).getIdSubkategori()+ "\t");
+            System.out.print(this.list.get(i).getKategori().getKategori()+ "\t");
+            System.out.print(this.list.get(i).getSubKategori()+ "\n");
+        }
+    }
+    
+    @Override
+    public void printList(int limit) {
+        if (this.list.isEmpty()) {
+            this.getAllData();
+        }
+        
+        int size = this.list.size();
+        
+        System.out.println("ID SubKategor\t Kategori\t SubKategori\n");
+        for (int i = 0; i < limit; i++) {
+            System.out.print(this.list.get(i).getIdSubkategori()+ "\t");
+            System.out.print(this.list.get(i).getKategori().getKategori()+ "\t");
+            System.out.print(this.list.get(i).getSubKategori()+ "\n");
+        }
+    }
 
     @Override
     public void filterList(int filter, String nilai) {
         
+    }
+    
+    public SubKategori getElement(String id){
+        SubKategori sub = new SubKategori();
+        
+        if(this.list.isEmpty()){
+            getAllData();
+        }
+        
+        int i = 0;
+        boolean ketemu = false;
+        while(i<list.size() && !ketemu){
+            String ID = list.get(i).getIdSubkategori();
+
+            if(ID.equals(id)){
+                sub = list.get(i);
+                ketemu = true;
+            }
+
+            i += 1;
+        
+        }
+        
+        return sub;
+    }
+
+    @Override
+    final void init() {
+        getAllData();
     }
 }

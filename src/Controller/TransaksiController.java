@@ -5,7 +5,6 @@
  */
 package Controller;
 
-import Interface.iDataAccess;
 import static Interface.iDataAccess.FILE_NAME;
 import Model.Transaksi;
 import java.io.File;
@@ -27,8 +26,13 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author ACER Z3-451
  */
-public class TransaksiController extends Transaksi implements iDataAccess {
+public class TransaksiController extends Controller{
     List<Transaksi> list = new ArrayList<>();
+
+    public TransaksiController() {
+        init();
+    }
+       
     
     @Override
     public void getAllData() {
@@ -64,7 +68,7 @@ public class TransaksiController extends Transaksi implements iDataAccess {
 
     @Override
     public void printList() {
-        if(this.list.size() == 0){
+        if(this.list.isEmpty()){
             this.getAllData();
         }
         int size = this.list.size();
@@ -76,6 +80,9 @@ public class TransaksiController extends Transaksi implements iDataAccess {
             System.out.print(this.list.get(i).getTotal()+ "\n");
         }
     }
+    
+
+    
 
     @Override
     public void filterList(int filter, String nilai) {
@@ -102,4 +109,38 @@ public class TransaksiController extends Transaksi implements iDataAccess {
         }
         return tr;
     }    
+
+    @Override
+    final void init() {
+        getAllData();
+    }
+
+    @Override
+    public void printList(int start, int end) {
+        if(this.list.isEmpty()){
+            this.getAllData();
+        }
+        
+        System.out.println("ID Transaksi\t\tTgl Transaksi\t\t\tTotal\n");
+        for(int i = start-1; i < end; i++){
+            System.out.print(this.list.get(i).getIdTransaksi()+ "\t\t\t");
+            System.out.print(this.list.get(i).getTglTransaksi()+ "\t");
+            System.out.print(this.list.get(i).getTotal()+ "\n");
+        }
+    }
+    
+    @Override
+    public void printList(int limit) {
+        if(this.list.isEmpty()){
+            this.getAllData();
+        }
+        
+        System.out.println("ID Transaksi\t\tTgl Transaksi\t\t\tTotal\n");
+        for(int i = 0; i < limit; i++){
+            System.out.print(this.list.get(i).getIdTransaksi()+ "\t\t\t");
+            System.out.print(this.list.get(i).getTglTransaksi()+ "\t");
+            System.out.print(this.list.get(i).getTotal()+ "\n");
+        }
+    }
+    
 }

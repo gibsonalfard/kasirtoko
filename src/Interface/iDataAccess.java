@@ -14,5 +14,7 @@ public interface iDataAccess {
     
     void getAllData();
     void printList();
+    void printList(int start, int end);
+    void printList(int limit);
     void filterList(int filter, String nilai);
 }
