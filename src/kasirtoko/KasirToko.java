@@ -30,10 +30,10 @@ public class KasirToko {
         System.out.println("\n\n\n");
         
         // untuk testing list keranjang //
-        System.out.println("List Belanjaan\n");
+        System.out.println("List Belanjaan");
         KeranjangController belanjaan = new KeranjangController();
         belanjaan.tambahBarang("ID001", 2);
-        belanjaan.tambahBarang("ID008", 9);
+        belanjaan.tambahBarang("ID002", 9);
         belanjaan.tambahBarang("ID001", 3); //menambah jumlah dari yang sebelumnya
         belanjaan.printList();
         
