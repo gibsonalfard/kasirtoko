@@ -5,7 +5,6 @@
  */
 package Controller;
 
-import Interface.iDataAccess;
 import static Interface.iDataAccess.FILE_NAME;
 import Model.DetailTransaksi;
 import java.io.File;

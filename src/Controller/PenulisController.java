@@ -5,7 +5,6 @@
  */
 package Controller;
 
-import Interface.iDataAccess;
 import static Interface.iDataAccess.FILE_NAME;
 import Model.Penulis;
 import java.io.File;

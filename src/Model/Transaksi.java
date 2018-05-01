@@ -5,7 +5,9 @@
  */
 package Model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -57,4 +59,5 @@ public class Transaksi {
     private String idTransaksi;
     private Date tglTransaksi;
     private double total;
+    
 }

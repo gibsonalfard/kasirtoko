@@ -6,12 +6,6 @@
 package kasirtoko;
 
 import Controller.BukuController;
-import Controller.DetailTransaksiController;
-import Controller.KategoriController;
-import Controller.PenerbitController;
-import Controller.PenulisController;
-import Controller.SubKategoriController;
-import Controller.TransaksiController;
 
 /**
  *
@@ -30,8 +24,12 @@ public class KasirToko {
 //        System.out.println("\n");
         
         BukuController buku = new BukuController();
-        buku.filterList(3, "Otonomi");
+        buku.filterList(3, "Islam");
+//        buku.filterList(4, "ID001");
         System.out.println("\n");
+        
+//        TransaksiController transaksi = new TransaksiController();
+//        transaksi.printList();
         
 //        PenulisController penulis = new PenulisController();
 //        penulis.printList();

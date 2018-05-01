@@ -5,9 +5,7 @@
  */
 package Controller;
 
-import Interface.iDataAccess;
 import static Interface.iDataAccess.FILE_NAME;
-import Model.Kategori;
 import Model.SubKategori;
 import java.io.File;
 import java.io.FileInputStream;

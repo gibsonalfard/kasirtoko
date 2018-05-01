@@ -157,6 +157,9 @@ public class BukuController extends Controller {
                 case 3: //Judul
                     kondisi = this.list.get(i).getJudulBuku().toLowerCase().contains(nilai);
                 break;
+                case 4: //ID
+                    kondisi = this.list.get(i).getIdBuku().toLowerCase().contains(nilai);
+                break;
             }
             
             if(kondisi){
