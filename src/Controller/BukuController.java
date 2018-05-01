@@ -200,4 +200,22 @@ public class BukuController extends Controller {
     final void init() {
         getAllData();
     }
+    
+    public Buku cariBuku(String ID_Buku) {
+        boolean kondisi = false;
+        int i=0;
+        ID_Buku = ID_Buku.toLowerCase();
+        
+        while(!kondisi && i<this.list.size()) {
+            kondisi = this.list.get(i).getIdBuku().toLowerCase().contains(ID_Buku);
+            i++;
+        }
+        
+        if(!kondisi){
+            return null;
+        }    
+        else{
+            return this.list.get(i-1);}
+    }
+    
 }

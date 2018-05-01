@@ -12,6 +12,7 @@ package Model;
 public class Keranjang {
     private Buku buku = new Buku();
     private int jumlah ;
+    private double total;
 
     /**
      * @return the buku
@@ -39,6 +40,20 @@ public class Keranjang {
      */
     public void setJumlah(int jumlah) {
         this.jumlah = jumlah;
+    }
+
+    /**
+     * @return the total
+     */
+    public double getTotal() {
+        return total;
+    }
+
+    /**
+     * @param total the total to set
+     */
+    public void setTotal(double total) {
+        this.total = total;
     }
 
 }

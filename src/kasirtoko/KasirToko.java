@@ -6,6 +6,7 @@
 package kasirtoko;
 
 import Controller.BukuController;
+import Controller.KeranjangController;
 
 /**
  *
@@ -25,8 +26,16 @@ public class KasirToko {
         
         BukuController buku = new BukuController();
         buku.filterList(3, "Islam");
-//        buku.filterList(4, "ID001");
-        System.out.println("\n");
+        buku.filterList(4, "ID001");
+        System.out.println("\n\n\n");
+        
+        // untuk testing list keranjang //
+        System.out.println("List Belanjaan\n");
+        KeranjangController belanjaan = new KeranjangController();
+        belanjaan.tambahBarang("ID001", 2);
+        belanjaan.tambahBarang("ID008", 9);
+        belanjaan.tambahBarang("ID001", 3); //menambah jumlah dari yang sebelumnya
+        belanjaan.printList();
         
 //        TransaksiController transaksi = new TransaksiController();
 //        transaksi.printList();
