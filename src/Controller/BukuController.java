@@ -57,6 +57,7 @@ public class BukuController extends Controller {
                 Cell thn = currentRow.getCell(5);
                 Cell sinopsis = currentRow.getCell(6);
                 Cell harga = currentRow.getCell(7);
+                Cell stokBuku = currentRow.getCell(8);
 
                 Buku book = new Buku();
                 book.setIdBuku(idBuku.getStringCellValue());
@@ -74,6 +75,7 @@ public class BukuController extends Controller {
                 book.setTahunTerbit((int) thn.getNumericCellValue());
                 book.setSinopsis(sinopsis.getStringCellValue());
                 book.setHarga(harga.getNumericCellValue());
+                book.setStok((int)stokBuku.getNumericCellValue());
 
                 this.list.add(book);
             }

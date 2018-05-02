@@ -14,15 +14,14 @@ import Controller.PenulisController;
 import Controller.RekeningController;
 import Controller.SubKategoriController;
 import Controller.TransaksiController;
+import Model.Buku;
 import Model.Rekening;
+import Model.Transaksi;
 import java.util.Scanner;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,15 +38,6 @@ public class KasirToko {
         String opsi, loop = "";
         /* Updated */
         try {
-//            TransaksiController trs = new TransaksiController();
-//            
-//            String id = trs.generateCode();
-//            
-
-//            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//            Date date = new Date();
-//            System.out.println(dateFormat.format(date));
-            
             KeranjangController belanjaan = new KeranjangController();
             BukuController book = new BukuController();
             BufferedReader dataIn = new BufferedReader(new InputStreamReader(System.in));
@@ -74,6 +64,7 @@ public class KasirToko {
                             System.out.print("Ulangi (Y/N) : ");
                             loop = dataIn.readLine();
                         } while (loop.equals("Y") || loop.equals("y"));
+                        belanjaan.hitungTotal();
                         break;
                     case 3:
                         belanjaan.printList();
@@ -136,8 +127,8 @@ public class KasirToko {
     }
 
     public static void filterBuku(KeranjangController cart, BukuController book, BufferedReader dataIn) {
-        String opsi = null;
-        String filter = null;
+        String opsi = "";
+        String filter = "";
 
         do {
             try {
@@ -192,8 +183,7 @@ public class KasirToko {
     }
 
     public static void pembayaran(KeranjangController cart) {
-//        Buku buku = new Buku();
-        TransaksiController tc = new TransaksiController();
+        Buku buku = new Buku();
         Scanner input = new Scanner(System.in);
         int harga = (int) cart.getTotalHarga();
 
@@ -216,17 +206,16 @@ public class KasirToko {
                     System.out.println("\nUang Anda kurang");
                 } else {
                     System.out.println("\nKembalian Anda : " + sisa);
-                    cart.setStock();
+                    cart.setStock(buku);
                     cart.delAllList();
                     cart.setTotalHarga(0);
-//                    tc.
                 }
                 break;
             case 2:
                 System.out.print("\nMasukkan No Kartu Kredit Anda : ");
                 String creditCard = input.next();
                 System.out.println("Kredit Anda bertambah sejumlah : " + harga);
-                cart.setStock();
+                cart.setStock(buku);
                 cart.delAllList();
                 cart.setTotalHarga(0);
                 break;
@@ -234,7 +223,7 @@ public class KasirToko {
                 System.out.print("\nSilahkan masukkan No Voucher Anda : ");
                 String noVoucher = input.next();
                 System.out.println("\nTerima kasih sudah menggunakan Voucher kami");
-                cart.setStock();
+                cart.setStock(buku);
                 cart.delAllList();
                 cart.setTotalHarga(0);
                 break;
@@ -263,7 +252,7 @@ public class KasirToko {
                                 + "\nNo Rekening : " + rekening.getNoRekening()
                                 + "\nNama Pemilik : " + rekening.getNamaPemilik()
                                 + "\nSaldo : " + (int) rekening.getSaldo());
-                        cart.setStock();
+                        cart.setStock(buku);
                         cart.delAllList();
                         cart.setTotalHarga(0);
                     }

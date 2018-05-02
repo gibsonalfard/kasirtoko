@@ -129,7 +129,7 @@ public class Buku {
     
     public int getStok () {
         
-        return 0;
+        return stok;
     }   
     
     private String idBuku;
