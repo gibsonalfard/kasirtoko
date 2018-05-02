@@ -192,9 +192,10 @@ public class KasirToko {
     }
 
     public static void pembayaran(KeranjangController cart) {
+//        Buku buku = new Buku();
         Scanner input = new Scanner(System.in);
         int harga = (int) cart.getTotalHarga();
-        
+
         System.out.print("\nJumlah yang harus dibayar : "
                 + harga
                 + "\nMenu Pembayaran yang bisa dipilih :\n"
@@ -214,6 +215,7 @@ public class KasirToko {
                     System.out.println("\nUang Anda kurang");
                 } else {
                     System.out.println("\nKembalian Anda : " + sisa);
+                    cart.setStock();
                     cart.delAllList();
                     cart.setTotalHarga(0);
                 }
@@ -222,6 +224,7 @@ public class KasirToko {
                 System.out.print("\nMasukkan No Kartu Kredit Anda : ");
                 String creditCard = input.next();
                 System.out.println("Kredit Anda bertambah sejumlah : " + harga);
+                cart.setStock();
                 cart.delAllList();
                 cart.setTotalHarga(0);
                 break;
@@ -229,6 +232,7 @@ public class KasirToko {
                 System.out.print("\nSilahkan masukkan No Voucher Anda : ");
                 String noVoucher = input.next();
                 System.out.println("\nTerima kasih sudah menggunakan Voucher kami");
+                cart.setStock();
                 cart.delAllList();
                 cart.setTotalHarga(0);
                 break;
@@ -239,25 +243,30 @@ public class KasirToko {
                 String noRekening = input.next();
 
                 Rekening rekening = rc.getElements(noRekening);
-                System.out.println("\nData Anda : "
-                        + "\nNo Rekening : " + rekening.getNoRekening()
-                        + "\nNama Pemilik : " + rekening.getNamaPemilik()
-                        + "\nSaldo : " + (int) rekening.getSaldo()
-                        + "\nSaldo Anda akan dikurangi sebanyak " + harga);
-
-                sisa = (int) rekening.getSaldo() - harga;
-                if (sisa < 0) {
-                    System.out.println("\nSaldo Anda kurang");
+                if (rekening.getNoRekening().equals("0")) {
+                    System.out.println("Rekening Anda tidak terdaftar");
                 } else {
-                    rekening.setSaldo(sisa);
-                    System.out.println("\nData Anda Sekarang : "
+                    System.out.println("\nData Anda : "
                             + "\nNo Rekening : " + rekening.getNoRekening()
                             + "\nNama Pemilik : " + rekening.getNamaPemilik()
-                            + "\nSaldo : " + (int) rekening.getSaldo());
-                    cart.delAllList();
-                    cart.setTotalHarga(0);
+                            + "\nSaldo : " + (int) rekening.getSaldo()
+                            + "\nSaldo Anda akan dikurangi sebanyak " + harga);
+
+                    sisa = (int) rekening.getSaldo() - harga;
+                    if (sisa < 0) {
+                        System.out.println("\nSaldo Anda kurang");
+                    } else {
+                        rekening.setSaldo(sisa);
+                        System.out.println("\nData Anda Sekarang : "
+                                + "\nNo Rekening : " + rekening.getNoRekening()
+                                + "\nNama Pemilik : " + rekening.getNamaPemilik()
+                                + "\nSaldo : " + (int) rekening.getSaldo());
+                        cart.setStock();
+                        cart.delAllList();
+                        cart.setTotalHarga(0);
+                    }
+                    rc.setData(rekening);
                 }
-                rc.setData(rekening);
                 break;
         }
     }

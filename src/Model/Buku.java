@@ -122,6 +122,16 @@ public class Buku {
     public void setHarga(double harga) {
         this.harga = harga;
     }
+    
+    public void setStok (int stok) {
+        this.stok = stok;
+    }
+    
+    public int getStok () {
+        
+        return 0;
+    }   
+    
     private String idBuku;
     private String judulBuku;
     private SubKategori subKategori;
@@ -130,4 +140,5 @@ public class Buku {
     private int tahunTerbit;
     private String sinopsis;
     private double harga;
+    private int stok;
 }

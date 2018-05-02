@@ -5,10 +5,24 @@
  */
 package Controller;
 
+import static Interface.iDataAccess.FILE_NAME;
 import Model.Buku;
 import Model.Keranjang;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -136,5 +150,51 @@ public class KeranjangController extends Controller{
             jumlahBuku += this.daftarBelanja.get(i).getJumlah();
         }
         return jumlahBuku;
+    }
+    
+    public void setStock() {
+        BukuController bc = new BukuController();
+        System.out.println ("\nMasuk modul..\n");
+        try {
+            FileInputStream excelFile = new FileInputStream(new File(FILE_NAME));
+            Workbook workbook = new XSSFWorkbook(excelFile);
+            Sheet sheet = workbook.getSheetAt(7);
+            Iterator<Row> iterator = sheet.iterator();
+            iterator.next();
+            System.out.println ("\nMasuk try\nUkuran daftar : "+this.daftarBelanja.size());
+            
+            for (int i = 0; i < this.daftarBelanja.size(); i++) {
+                Buku buku = bc.getElements(this.daftarBelanja.get(i).getBuku().getIdBuku());
+                System.out.println ("\n"+buku.getIdBuku());
+                
+                System.out.println ("\nMasuk FOR\n");
+                while (iterator.hasNext() && !(buku.getIdBuku()).equals("000")) {
+                    Row currentRow = iterator.next();
+
+                    Cell idBuku = currentRow.getCell(0);
+                    System.out.println("\n Nilai Stok List Keranjang : " + this.daftarBelanja.get(i).getBuku().getStok()
+                            + "\n Nilai Stok List Buku : " + buku.getStok() + "\n");
+
+                    if (buku.getIdBuku().equals(idBuku.getStringCellValue())) {
+                        currentRow.getCell(8).setCellValue(this.daftarBelanja.get(i).getBuku().getStok());
+                        System.out.println("\nIf masukk");
+                        try {
+                            FileOutputStream output = new FileOutputStream(new File(FILE_NAME));
+                            workbook.write(output);
+                            workbook.close();
+                            System.out.println("\nOutput masukk");
+                        } catch (FileNotFoundException ex) {
+                            Logger.getLogger(RekeningController.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (IOException ex) {
+                            Logger.getLogger(RekeningController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(KeranjangController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(KeranjangController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
