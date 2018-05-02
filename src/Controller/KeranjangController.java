@@ -35,6 +35,17 @@ public class KeranjangController extends Controller{
         System.out.println("\nID Buku\t\tJudul\t\t\t\tJumlah\t\tHarga\t\tTotal\n");
         for(int i = 0; i < size; i++){
             System.out.print(this.daftarBelanja.get(i).getBuku().getIdBuku()+"\t\t");
+            if (this.daftarBelanja.get(i).getBuku().getJudulBuku().length() > 39) {
+                String text = this.daftarBelanja.get(i).getBuku().getJudulBuku();
+                text = text.substring(0, 37);
+                text += "...";
+                System.out.print(text + "\t");
+            } else {
+                System.out.print(this.daftarBelanja.get(i).getBuku().getJudulBuku()
+                        + (this.daftarBelanja.get(i).getBuku().getJudulBuku().length() > 39 ? "\t"
+                        : this.daftarBelanja.get(i).getBuku().getJudulBuku().length() < 30 ? "\t\t"
+                        : this.daftarBelanja.get(i).getBuku().getJudulBuku().length() < 24 ? "\t\t\t\t" : "\t\t\t"));
+            }
             System.out.print(this.daftarBelanja.get(i).getBuku().getJudulBuku()+ "\t");
             System.out.print(this.daftarBelanja.get(i).getJumlah()+ "\t\t");
             System.out.print(this.daftarBelanja.get(i).getBuku().getHarga()+"\t\t");
@@ -105,5 +116,25 @@ public class KeranjangController extends Controller{
     
     public List<Keranjang> getList(){
         return this.daftarBelanja;
+    }
+    
+    public void delAllList () {
+        this.daftarBelanja.clear();
+    }
+    
+    public void setTotalHarga (double total) {
+        this.Total = total;
+    }
+    
+    public double getTotalHarga () {
+        return Total;
+    }
+    
+    public short getJumlahBuku () {
+        short jumlahBuku = 0;
+        for (int i = 0; i < this.daftarBelanja.size(); i++) {
+            jumlahBuku += this.daftarBelanja.get(i).getJumlah();
+        }
+        return jumlahBuku;
     }
 }
