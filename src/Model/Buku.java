@@ -128,8 +128,7 @@ public class Buku {
     }
     
     public int getStok () {
-        
-        return stok;
+        return this.stok;
     }   
     
     private String idBuku;

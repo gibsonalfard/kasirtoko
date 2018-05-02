@@ -260,5 +260,6 @@ public class KasirToko {
                 }
                 break;
         }
+        //Buat nanti tambah dari 
     }
 }

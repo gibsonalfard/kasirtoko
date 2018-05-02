@@ -67,7 +67,7 @@ public class KeranjangController extends Controller {
             int harga = (int) this.daftarBelanja.get(i).getTotal();
             System.out.print("Rp " + super.number_format(harga) + "\n");
         }
-        System.out.print("\nTotal yang harus dibayar : " + this.Total + "\n");
+        System.out.print("\nTotal yang harus dibayar : "+super.number_format((int) this.getTotalHarga())+"\n");
     }
 
     @Override
@@ -121,7 +121,7 @@ public class KeranjangController extends Controller {
             k.setTotal(b.getHarga() * Jumlah);
             this.daftarBelanja.add(k);
         }
-
+        hitungTotal();
     }
 
     public void hitungTotal() {
@@ -158,7 +158,7 @@ public class KeranjangController extends Controller {
 
     public void setStock(Buku buku) {
         BukuController bc = new BukuController();
-        System.out.println("\nMasuk modul..\n");
+        //System.out.println ("\nMasuk modul..\n");
         try {
             FileInputStream excelFile = new FileInputStream(new File(FILE_NAME));
             Workbook workbook = new XSSFWorkbook(excelFile);

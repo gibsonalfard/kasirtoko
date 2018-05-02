@@ -57,7 +57,7 @@ public class BukuController extends Controller {
                 Cell thn = currentRow.getCell(5);
                 Cell sinopsis = currentRow.getCell(6);
                 Cell harga = currentRow.getCell(7);
-                Cell stokBuku = currentRow.getCell(8);
+                Cell stok = currentRow.getCell(8);
 
                 Buku book = new Buku();
                 book.setIdBuku(idBuku.getStringCellValue());
@@ -75,6 +75,8 @@ public class BukuController extends Controller {
                 book.setTahunTerbit((int) thn.getNumericCellValue());
                 book.setSinopsis(sinopsis.getStringCellValue());
                 book.setHarga(harga.getNumericCellValue());
+                book.setStok((int) stok.getNumericCellValue());
+                
                 book.setStok((int)stokBuku.getNumericCellValue());
 
                 this.list.add(book);
@@ -112,7 +114,7 @@ public class BukuController extends Controller {
         }
         int size = this.list.size();
 
-        System.out.println("ID Buku\tJudul Buku\t\t\t\t\tSub Kategori\tPenulis\t\t\t\tHarga");
+        System.out.println("ID Buku\tJudul Buku\t\t\t\t\tSub Kategori\tPenulis\t\t\t\tHarga\t\tStok Barang");
         for (int i = start - 1; i < end; i++) {
             System.out.print(this.list.get(i).getIdBuku() + "\t");
             if(this.list.get(i).getJudulBuku().length() > 39){
@@ -134,7 +136,8 @@ public class BukuController extends Controller {
 //            System.out.print(this.list.get(i).getTahunTerbit() + "\t");
 //            System.out.print(this.list.get(i).getSinopsis() + "\t");
             int harga = (int) this.list.get(i).getHarga();
-            System.out.print("Rp " + super.number_format(harga) + "\n");
+            System.out.print("Rp " + super.number_format(harga) + "\t\t");
+            System.out.print(this.list.get(i).getStok() + "\n");
         }
     }
 
