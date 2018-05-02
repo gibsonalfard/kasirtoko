@@ -165,31 +165,30 @@ public class KeranjangController extends Controller {
             Sheet sheet = workbook.getSheetAt(0);
             Iterator<Row> iterator = sheet.iterator();
             iterator.next();
-            System.out.println("\nMasuk try\nUkuran daftar : " + this.daftarBelanja.size());
+//            System.out.println("\nMasuk try\nUkuran daftar : " + this.daftarBelanja.size());
 
             for (int i = 0; i < this.daftarBelanja.size(); i++) {
                 buku = bc.getElements(this.daftarBelanja.get(i).getBuku().getIdBuku());
-                System.out.println("\n" + buku.getIdBuku());
-
-                System.out.println("\nMasuk FOR\n");
+//                System.out.println("\n" + buku.getIdBuku());
+//                System.out.println("\nMasuk FOR\n");
                 while (iterator.hasNext() && !(buku.getIdBuku()).equals("000")) {
                     Row currentRow = iterator.next();
 
                     Cell idBuku = currentRow.getCell(0);
-                    System.out.println("\n Nilai Stok List Keranjang : " + this.daftarBelanja.get(i).getBuku().getStok()
-                            + "\n Nilai Stok List Buku : " + buku.getStok());
-                    System.out.println("\n ID Buku List Keranjang : " + this.daftarBelanja.get(i).getBuku().getIdBuku()
-                            + "\n ID Buku List Buku : " + buku.getIdBuku()
-                            + "\n ID Buku dari Cell : " + idBuku.getStringCellValue());
+//                    System.out.println("\n Nilai Stok List Keranjang : " + this.daftarBelanja.get(i).getBuku().getStok()
+//                            + "\n Nilai Stok List Buku : " + buku.getStok());
+//                    System.out.println("\n ID Buku List Keranjang : " + this.daftarBelanja.get(i).getBuku().getIdBuku()
+//                            + "\n ID Buku List Buku : " + buku.getIdBuku()
+//                            + "\n ID Buku dari Cell : " + idBuku.getStringCellValue());
 
                     if (buku.getIdBuku().equals(idBuku.getStringCellValue())) {
                         currentRow.getCell(8).setCellValue(this.daftarBelanja.get(i).getBuku().getStok());
-                        System.out.println("\nIf masukk");
+//                        System.out.println("\nIf masukk");
                         try {
                             FileOutputStream output = new FileOutputStream(new File(FILE_NAME));
                             workbook.write(output);
                             workbook.close();
-                            System.out.println("\nOutput masukk");
+//                            System.out.println("\nOutput masukk");
                         } catch (FileNotFoundException ex) {
                             Logger.getLogger(RekeningController.class.getName()).log(Level.SEVERE, null, ex);
                         } catch (IOException ex) {
