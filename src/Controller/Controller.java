@@ -6,6 +6,10 @@
 package Controller;
 
 import Interface.iDataAccess;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 /**
  *
@@ -13,4 +17,11 @@ import Interface.iDataAccess;
  */
 public abstract class Controller implements iDataAccess {
     abstract void init();
+    
+    String number_format(int number) {
+        DecimalFormat df = new DecimalFormat("#,##0",new DecimalFormatSymbols(new Locale("pt", "ID")));
+        BigDecimal value = new BigDecimal(number);
+
+        return String.valueOf(df.format(value.floatValue()));
+    }
 }

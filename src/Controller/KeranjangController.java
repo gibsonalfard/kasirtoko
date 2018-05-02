@@ -38,7 +38,8 @@ public class KeranjangController extends Controller{
             System.out.print(this.daftarBelanja.get(i).getBuku().getJudulBuku()+ "\t");
             System.out.print(this.daftarBelanja.get(i).getJumlah()+ "\t\t");
             System.out.print(this.daftarBelanja.get(i).getBuku().getHarga()+"\t\t");
-            System.out.print(this.daftarBelanja.get(i).getTotal()+"\n");
+            int harga = (int) this.daftarBelanja.get(i).getTotal();
+            System.out.print("Rp " + super.number_format(harga) + "\n");
         }
         hitungTotal();
         System.out.print("\nTotal yang harus dibayar : "+this.Total+"\n");
@@ -100,5 +101,9 @@ public class KeranjangController extends Controller{
             temp = temp + this.daftarBelanja.get(i).getTotal();
         }
         this.Total += temp;
+    }
+    
+    public List<Keranjang> getList(){
+        return this.daftarBelanja;
     }
 }

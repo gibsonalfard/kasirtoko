@@ -5,10 +5,8 @@
  */
 package Controller;
 
-import Interface.iDataAccess;
 import static Interface.iDataAccess.FILE_NAME;
 import Model.Buku;
-import Model.SubKategori;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -34,7 +32,11 @@ public class BukuController extends Controller {
     public BukuController() {
         this.init();
     }
-
+    
+    public List<Buku> getList(){
+        return this.list;
+    }
+    
     @Override
     public void getAllData() {
         try {
@@ -96,7 +98,8 @@ public class BukuController extends Controller {
             System.out.print(this.list.get(i).getPenerbit().getNamaPenerbit() + "\t");
             System.out.print(this.list.get(i).getTahunTerbit() + "\t");
             System.out.print(this.list.get(i).getSinopsis() + "\t");
-            System.out.print(this.list.get(i).getHarga() + "\n");
+            int harga = (int) this.list.get(i).getHarga();
+            System.out.print("Rp " + super.number_format(harga) + "\n");
         }
     }
 
@@ -107,16 +110,29 @@ public class BukuController extends Controller {
         }
         int size = this.list.size();
 
-        System.out.println("ID Buku\tJudul Buku\t\t\tSub Kategori\tPenulis\t\tPenerbit\tTahun Terbit\tSinopsis\tHarga\n");
+        System.out.println("ID Buku\tJudul Buku\t\t\t\t\tSub Kategori\tPenulis\t\t\t\tHarga");
         for (int i = start - 1; i < end; i++) {
             System.out.print(this.list.get(i).getIdBuku() + "\t");
-            System.out.print(this.list.get(i).getJudulBuku() + "\t\t");
+            if(this.list.get(i).getJudulBuku().length() > 39){
+                String text = this.list.get(i).getJudulBuku();
+                text = text.substring(0,37);
+                text = text + "...";
+                System.out.print(text + "\t");
+            }else{
+                System.out.print(this.list.get(i).getJudulBuku() 
+                    + (this.list.get(i).getJudulBuku().length() > 39 ? "\t" 
+                      : (this.list.get(i).getJudulBuku().length() > 30) ? "\t\t" 
+                      : (this.list.get(i).getJudulBuku().length() < 24) ? "\t\t\t\t" : "\t\t\t"));
+            }
             System.out.print(this.list.get(i).getSubKategori().getSubKategori() + "\t");
-            System.out.print(this.list.get(i).getPenulis().getNamaPenulis() + "\t");
-            System.out.print(this.list.get(i).getPenerbit().getNamaPenerbit() + "\t");
-            System.out.print(this.list.get(i).getTahunTerbit() + "\t");
-            System.out.print(this.list.get(i).getSinopsis() + "\t");
-            System.out.print(this.list.get(i).getHarga() + "\n");
+            System.out.print(this.list.get(i).getPenulis().getNamaPenulis()
+                    + (this.list.get(i).getPenulis().getNamaPenulis().length() > 23 ? "\t" 
+                    : (this.list.get(i).getPenulis().getNamaPenulis().length() < 15) ? "\t\t\t" : "\t\t"));
+//            System.out.print(this.list.get(i).getPenerbit().getNamaPenerbit() + "\t");
+//            System.out.print(this.list.get(i).getTahunTerbit() + "\t");
+//            System.out.print(this.list.get(i).getSinopsis() + "\t");
+            int harga = (int) this.list.get(i).getHarga();
+            System.out.print("Rp " + super.number_format(harga) + "\n");
         }
     }
 
@@ -136,7 +152,8 @@ public class BukuController extends Controller {
             System.out.print(this.list.get(i).getPenerbit().getNamaPenerbit() + "\t");
             System.out.print(this.list.get(i).getTahunTerbit() + "\t");
             System.out.print(this.list.get(i).getSinopsis() + "\t");
-            System.out.print(this.list.get(i).getHarga() + "\n");
+            int harga = (int) this.list.get(i).getHarga();
+            System.out.print("Rp " + super.number_format(harga) + "\n");
         }
     }
 
@@ -145,24 +162,24 @@ public class BukuController extends Controller {
         boolean kondisi = false;
         int size = this.list.size();
         nilai = nilai.toLowerCase();
-        
+
         for (int i = 0; i < size; i++) {
             switch (filter) {
                 case 1: //Penulis
                     kondisi = this.list.get(i).getPenulis().getNamaPenulis().toLowerCase().contains(nilai);
-                break;
+                    break;
                 case 2: //Penerbit
                     kondisi = this.list.get(i).getPenerbit().getNamaPenerbit().toLowerCase().contains(nilai);
-                break;
+                    break;
                 case 3: //Judul
                     kondisi = this.list.get(i).getJudulBuku().toLowerCase().contains(nilai);
-                break;
+                    break;
                 case 4: //ID
                     kondisi = this.list.get(i).getIdBuku().toLowerCase().contains(nilai);
-                break;
+                    break;
             }
-            
-            if(kondisi){
+
+            if (kondisi) {
                 System.out.print(this.list.get(i).getIdBuku() + "\t");
                 System.out.print(this.list.get(i).getJudulBuku() + "\t\t");
                 System.out.print(this.list.get(i).getSubKategori().getSubKategori() + "\t");
@@ -170,7 +187,8 @@ public class BukuController extends Controller {
                 System.out.print(this.list.get(i).getPenerbit().getNamaPenerbit() + "\t");
                 System.out.print(this.list.get(i).getTahunTerbit() + "\t");
                 System.out.print(this.list.get(i).getSinopsis() + "\t");
-                System.out.print(this.list.get(i).getHarga() + "\n");
+                int harga = (int) this.list.get(i).getHarga();
+                System.out.print("Rp " + super.number_format(harga) + "\n");
             }
         }
     }
@@ -200,22 +218,22 @@ public class BukuController extends Controller {
     final void init() {
         getAllData();
     }
-    
+
     public Buku cariBuku(String ID_Buku) {
         boolean kondisi = false;
-        int i=0;
+        int i = 0;
         ID_Buku = ID_Buku.toLowerCase();
-        
-        while(!kondisi && i<this.list.size()) {
+
+        while (!kondisi && i < this.list.size()) {
             kondisi = this.list.get(i).getIdBuku().toLowerCase().contains(ID_Buku);
             i++;
         }
-        
-        if(!kondisi){
+
+        if (!kondisi) {
             return null;
-        }    
-        else{
-            return this.list.get(i-1);}
+        } else {
+            return this.list.get(i - 1);
+        }
     }
-    
+
 }
