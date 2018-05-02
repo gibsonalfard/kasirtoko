@@ -20,6 +20,9 @@ import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,6 +39,15 @@ public class KasirToko {
         String opsi, loop = "";
         /* Updated */
         try {
+//            TransaksiController trs = new TransaksiController();
+//            
+//            String id = trs.generateCode();
+//            
+
+//            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//            Date date = new Date();
+//            System.out.println(dateFormat.format(date));
+            
             KeranjangController belanjaan = new KeranjangController();
             BukuController book = new BukuController();
             BufferedReader dataIn = new BufferedReader(new InputStreamReader(System.in));
