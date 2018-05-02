@@ -193,6 +193,7 @@ public class KasirToko {
 
     public static void pembayaran(KeranjangController cart) {
 //        Buku buku = new Buku();
+        TransaksiController tc = new TransaksiController();
         Scanner input = new Scanner(System.in);
         int harga = (int) cart.getTotalHarga();
 
@@ -218,6 +219,7 @@ public class KasirToko {
                     cart.setStock();
                     cart.delAllList();
                     cart.setTotalHarga(0);
+//                    tc.
                 }
                 break;
             case 2:
