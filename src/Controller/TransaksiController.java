@@ -151,8 +151,7 @@ public class TransaksiController extends Controller {
 
             Row currentRow = sheet.getRow(size - 1);
 
-            Cell idTr\d     t
-                   ans = currentRow.getCell(0);
+            Cell idTrans = currentRow.getCell(0);
             id = idTrans.getStringCellValue().substring(1);
             int code = Integer.parseInt(id);
             code += 1;

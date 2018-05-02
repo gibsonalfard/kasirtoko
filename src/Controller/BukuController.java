@@ -77,7 +77,7 @@ public class BukuController extends Controller {
                 book.setHarga(harga.getNumericCellValue());
                 book.setStok((int) stok.getNumericCellValue());
                 
-                book.setStok((int)stokBuku.getNumericCellValue());
+//                book.setStok((int)stokBuku.getNumericCellValue());
 
                 this.list.add(book);
             }
