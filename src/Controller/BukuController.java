@@ -77,7 +77,7 @@ public class BukuController extends Controller {
                 book.setHarga(harga.getNumericCellValue());
                 book.setStok((int) stok.getNumericCellValue());
                 
-                book.setStok((int)stokBuku.getNumericCellValue());
+                book.setStok((int)stok.getNumericCellValue());
 
                 this.list.add(book);
             }
@@ -200,10 +200,11 @@ public class BukuController extends Controller {
 
     public Buku getElements(String id) {
         Buku buku = new Buku();
-
-        if (this.list.isEmpty()) {
-            getAllData();
-        }
+        buku.setIdBuku("000");
+        
+//        if (this.list.isEmpty()) {
+//            getAllData();
+//        }
 
         int i = 0;
         boolean ketemu = false;

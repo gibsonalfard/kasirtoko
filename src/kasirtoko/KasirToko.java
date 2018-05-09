@@ -51,6 +51,7 @@ public class KasirToko {
                 System.out.println("2. Beli Buku");
                 System.out.println("3. Liat Keranjang");
                 System.out.println("4. Bayar");
+                System.out.println("5. Tampilkan data transaksi");
                 System.out.print("Masukkan Pilihan Anda : ");
                 opsi = dataIn.readLine();
 
@@ -64,7 +65,7 @@ public class KasirToko {
                             System.out.print("Ulangi (Y/N) : ");
                             loop = dataIn.readLine();
                         } while (loop.equals("Y") || loop.equals("y"));
-                        belanjaan.hitungTotal();
+//                        belanjaan.hitungTotal();
                         break;
                     case 3:
                         belanjaan.printList();
@@ -73,6 +74,10 @@ public class KasirToko {
                         /* Pembayaran */
                         pembayaran(belanjaan);
                         break;
+                    case 5:
+                        /*Menampilkan data transaksi dari file excel*/
+                        TransaksiController tc = new TransaksiController();
+                        tc.printList();
                 }
             } while (Integer.parseInt(opsi) < 5);
         } catch (IOException ex) {
@@ -184,6 +189,7 @@ public class KasirToko {
 
     public static void pembayaran(KeranjangController cart) {
         Buku buku = new Buku();
+        TransaksiController tc = new TransaksiController();
         Scanner input = new Scanner(System.in);
         int harga = (int) cart.getTotalHarga();
 
@@ -206,6 +212,7 @@ public class KasirToko {
                     System.out.println("\nUang Anda kurang");
                 } else {
                     System.out.println("\nKembalian Anda : " + sisa);
+                    tc.setData(harga,cart);
                     cart.setStock(buku);
                     cart.delAllList();
                     cart.setTotalHarga(0);
@@ -216,6 +223,7 @@ public class KasirToko {
                 String creditCard = input.next();
                 System.out.println("Kredit Anda bertambah sejumlah : " + harga);
                 cart.setStock(buku);
+                tc.setData(harga, cart);
                 cart.delAllList();
                 cart.setTotalHarga(0);
                 break;
@@ -224,6 +232,7 @@ public class KasirToko {
                 String noVoucher = input.next();
                 System.out.println("\nTerima kasih sudah menggunakan Voucher kami");
                 cart.setStock(buku);
+                tc.setData(harga, cart);
                 cart.delAllList();
                 cart.setTotalHarga(0);
                 break;
@@ -252,6 +261,7 @@ public class KasirToko {
                                 + "\nNo Rekening : " + rekening.getNoRekening()
                                 + "\nNama Pemilik : " + rekening.getNamaPemilik()
                                 + "\nSaldo : " + (int) rekening.getSaldo());
+                        tc.setData(harga, cart);
                         cart.setStock(buku);
                         cart.delAllList();
                         cart.setTotalHarga(0);
